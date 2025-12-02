@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Using <img> Tag with Empty src Attribute
+    </title>
+</head>
+
+<body style="background-color:black">
+<center>
+    <div>
+        <h1 style="font-family:nunito; color:white;">Свечка за ЗБС</h1>
+        <h3 style="font-family:nunito; color:white;">Пастаў свечку за РВК, Раду, Сакратарыят ці каго захочаш.</h3>
+        <!-- img element without src attribute -->
+        <img id="image" src="" />
+    </div>
+    <button type="button" onclick="show()" id="btnID">
+        паставіць свечку
+    </button>
+    <script>
+        function show() {
+            /* Get image and change value 
+            of src attribute */
+            let image = document.getElementById("image");
+            image.src = "https://i.ibb.co/SYg7nCf/orthodox-church-candles-candles-bulk-wholesale-australia-candella-fabrica-taper-candle-orig.png"
+            document.getElementById("btnID")
+                .style.display = "none";
+        }
+    </script>
+</center>
+</body>
+
+</html>
