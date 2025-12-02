@@ -4,36 +4,37 @@
 <body style="background-color:black; text-align: center">
 
 <div>
-        <h1 style="font-family:nunito; color:white;">Свечка за ЗБС</h1>
-        <h3 style="font-family:nunito; color:white;">Пастаў свечку за РВК, Раду, Сакратарыят ці каго захочаш.</h3>
-<img id="image" src="https://i.ibb.co/SYg7nCf/orthodox-church-candles-candles-bulk-wholesale-australia-candella-fabrica-taper-candle-orig.png" hidden>
+	<h1 style="font-family:nunito; color:white;">Свечка за ЗБС</h1>
+	<h3 style="font-family:nunito; color:white;">Пастаў свечку за РВК, Раду, Сакратарыят ці каго захочаш.</h3>
 </div>
 
-    <button type="button" onclick="show()" id="btnID">паставіць свечку
+	<button type="button" onclick="show()" id="btnID">паставіць свечку
 </button>
 
 <div>
-  <h5 style="font-family:nunito; color:white;">Свечак пастаўлена: <span id="display">0</span></h5>
+	<h5 style="font-family:nunito; color:white;">Свечак пастаўлена: <span id="display">0</span></h5>
+	<img id="image" src="https://i.ibb.co/SYg7nCf/orthodox-church-candles-candles-bulk-wholesale-australia-candella-fabrica-taper-candle-orig.png" hidden>
 </div>
 
 <script>
-        const showImageButton = document.getElementById("btnID");
-      const myImage = document.getElementById("image");
-      showImageButton.addEventListener("click", () => {
-         myImage.hidden = myImage.visible;
-      });
+	const showImageButton = document.getElementById("btnID");
+	const myImage = document.getElementById("image");
+		showImageButton.addEventListener("click", () => {
+		myImage.hidden = myImage.visible;
+		});
 </script>
 
 <script>
-        let count = 0;
-        let disp = document.getElementById("display");
-        let btn = document.getElementById("btnID");
+	let count = 0;
+	let btn = document.getElementById("btnID");
+	let disp = document.getElementById("display");
         
-        btn.onclick = function () {
-                    count++;
-        disp.innerHTML = count;
-        }
-	</script>
+		btn.onclick = function () {
+			count++;
+		disp.innerHTML = count;
+		}
+</script>
 </body>
 
 </html>
+
