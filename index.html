@@ -14,7 +14,7 @@
     button {
       font-size: 16px;
       padding: 10px 20px;
-      margin: 5px;
+      margin: 10px;
       cursor: pointer;
     }
 
@@ -22,11 +22,31 @@
       margin-top: 10px;
     }
 
-    .candle {
-      width: 40px;  /* small candle */
-      height: auto;
-      margin: 2px;
+    .candle-wrapper {
       display: inline-block;
+      margin: 5px;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    .candle {
+      width: 40px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .message {
+      font-size: 12px;
+      color: #ffd700; /* gold for visibility */
+      word-break: break-word;
+      max-width: 60px;
+    }
+
+    input[type="text"] {
+      padding: 5px;
+      font-size: 14px;
+      width: 200px;
     }
   </style>
 </head>
@@ -38,8 +58,8 @@
   </div>
 
   <div>
+    <input type="text" id="messageInput" placeholder="Напішыце паведамленне">
     <button type="button" id="btnID">паставіць свечку</button>
-    <button type="button" id="resetBtn">Скід</button>
   </div>
 
   <div>
@@ -51,53 +71,51 @@
 
   <script>
     const btn = document.getElementById("btnID");
-    const resetBtn = document.getElementById("resetBtn");
     const disp = document.getElementById("display");
     const candlesContainer = document.getElementById("candles");
+    const messageInput = document.getElementById("messageInput");
 
-    // Load count and candle count from localStorage or start at 0
+    // Load count and candle data from localStorage
     let count = Number(localStorage.getItem("count") || 0);
-    let candleCount = Number(localStorage.getItem("candleCount") || 0);
+    let candleData = JSON.parse(localStorage.getItem("candleData") || "[]");
+    // candleData is an array of objects: { message: "text" }
 
     // Function to render candles
-    function renderCandles(num) {
-      candlesContainer.innerHTML = ""; // clear existing candles
-      for (let i = 0; i < num; i++) {
+    function renderCandles() {
+      candlesContainer.innerHTML = "";
+      candleData.forEach(data => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "candle-wrapper";
+
         const candle = document.createElement("img");
         candle.src = "https://i.ibb.co/SYg7nCf/orthodox-church-candles-candles-bulk-wholesale-australia-candella-fabrica-taper-candle-orig.png";
         candle.className = "candle";
-        candlesContainer.appendChild(candle);
-      }
+
+        const msg = document.createElement("div");
+        msg.className = "message";
+        msg.textContent = data.message;
+
+        wrapper.appendChild(candle);
+        wrapper.appendChild(msg);
+        candlesContainer.appendChild(wrapper);
+      });
     }
 
     // Initialize display and candles
     disp.textContent = count;
-    renderCandles(candleCount);
+    renderCandles();
 
-    // Add candle button
     btn.addEventListener("click", () => {
+      const msgText = messageInput.value.trim();
+      candleData.push({ message: msgText });
+      localStorage.setItem("candleData", JSON.stringify(candleData));
+
       count++;
-      candleCount++;
       localStorage.setItem("count", count);
-      localStorage.setItem("candleCount", candleCount);
-
       disp.textContent = count;
 
-      // Add new candle
-      const candle = document.createElement("img");
-      candle.src = "https://i.ibb.co/SYg7nCf/orthodox-church-candles-candles-bulk-wholesale-australia-candella-fabrica-taper-candle-orig.png";
-      candle.className = "candle";
-      candlesContainer.appendChild(candle);
-    });
-
-    // Reset button
-    resetBtn.addEventListener("click", () => {
-      count = 0;
-      candleCount = 0;
-      localStorage.setItem("count", count);
-      localStorage.setItem("candleCount", candleCount);
-      disp.textContent = count;
-      candlesContainer.innerHTML = "";
+      renderCandles();
+      messageInput.value = ""; // clear input
     });
   </script>
 
