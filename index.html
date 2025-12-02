@@ -14,7 +14,7 @@
     button {
       font-size: 16px;
       padding: 10px 20px;
-      margin: 10px;
+      margin: 5px;
       cursor: pointer;
     }
 
@@ -37,8 +37,10 @@
     <h3>Пастаў свечку за РВК, Раду, Сакратарыят ці каго захочаш.</h3>
   </div>
 
-  <button type="button" id="btnID">паставіць свечку</button>
-<button type="button" id="resetBtn">Скід</button>
+  <div>
+    <button type="button" id="btnID">паставіць свечку</button>
+    <button type="button" id="resetBtn">Скід</button>
+  </div>
 
   <div>
     <h5>
@@ -49,13 +51,12 @@
 
   <script>
     const btn = document.getElementById("btnID");
+    const resetBtn = document.getElementById("resetBtn");
     const disp = document.getElementById("display");
     const candlesContainer = document.getElementById("candles");
 
-    // Load count from localStorage or start at 0
+    // Load count and candle count from localStorage or start at 0
     let count = Number(localStorage.getItem("count") || 0);
-
-    // Load candle count from localStorage or start at 0
     let candleCount = Number(localStorage.getItem("candleCount") || 0);
 
     // Function to render candles
@@ -73,6 +74,7 @@
     disp.textContent = count;
     renderCandles(candleCount);
 
+    // Add candle button
     btn.addEventListener("click", () => {
       count++;
       candleCount++;
@@ -86,6 +88,16 @@
       candle.src = "https://i.ibb.co/SYg7nCf/orthodox-church-candles-candles-bulk-wholesale-australia-candella-fabrica-taper-candle-orig.png";
       candle.className = "candle";
       candlesContainer.appendChild(candle);
+    });
+
+    // Reset button
+    resetBtn.addEventListener("click", () => {
+      count = 0;
+      candleCount = 0;
+      localStorage.setItem("count", count);
+      localStorage.setItem("candleCount", candleCount);
+      disp.textContent = count;
+      candlesContainer.innerHTML = "";
     });
   </script>
 
