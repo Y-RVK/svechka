@@ -46,28 +46,25 @@
     >
   </div>
 
-  <script>
-    const btn = document.getElementById("btnID");
-    const disp = document.getElementById("display");
-    const img = document.getElementById("image");
+<script>
+  const btn = document.getElementById("btnID");
+  const disp = document.getElementById("display");
+  const img = document.getElementById("image");
 
-    // Load count from localStorage or start at 0
-    let count = Number(localStorage.getItem("count") || 0);
+  // Load count from localStorage or start at 0
+  let count = Number(localStorage.getItem("count") || 0);
 
-    function updateDisplay() {
-      disp.textContent = count;
-      img.hidden = count === 0; // hide candle if count is 0
-    }
+  // Initialize display without showing the candle
+  disp.textContent = count;
+  img.hidden = true; // always hidden on page load
 
-    btn.addEventListener("click", () => {
-      count++;
-      localStorage.setItem("count", count); // persist count
-      updateDisplay();
-    });
-
-    // Initialize display
-    updateDisplay();
-  </script>
+  btn.addEventListener("click", () => {
+    count++;
+    localStorage.setItem("count", count); // persist count
+    disp.textContent = count;
+    img.hidden = false; // show candle when button is clicked
+  });
+</script>
 
 </body>
 </html>
